@@ -4,15 +4,32 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>{{ .Title }}</title>
+
+	{{ if .IsHome }}
+		<title>---</title>
+	{{ else }}
+		<title>{{ .Title }} | ---</title>
+	{{ end }}
+	
+	<link rel="canonical" href="{{ .Permalink | absURL }}"/>
 	{{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
 	{{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-	<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,400;1,400;1,700&display=preload" rel="stylesheet">
+
+	{{ $options := (dict "targetPath" "css/style.min.css" "outputStyle" "compressed") }}
+	{{ $style := resources.Get "scss/main.scss" | toCSS $options }}
+	<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+	{{ template "_internal/opengraph.html" . }}
+	{{ template "_internal/twitter_cards.html" . }}
+
 	{{ with .OutputFormats.Get "RSS" -}}
 		{{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
 	{{- end }}
 </head>
-<body>
+<body style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true">
+	{{ partial "svg.html" . }}
 	{{ partial "header" . }}
 	{{ block "main" . }}{{ end }}
 	{{ partial "footer" . }}
