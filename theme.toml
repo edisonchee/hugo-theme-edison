@@ -1,0 +1,12 @@
+name = "Edison"
+license = "MIT"
+licenselink = "https://github.com/edisonchee/hugo-theme-edison/blob/master/LICENSE"
+description = "Edison starter theme"
+homepage = "https://github.com/edisonchee/hugo-theme-edison/"
+tags = ["blog"]
+features = ["blog"]
+min_version = "0.71"
+
+[author]
+  name = "Edison"
+  homepage = "https://github.com/edisonchee"
