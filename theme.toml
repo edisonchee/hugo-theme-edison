@@ -5,7 +5,7 @@ description = "Edison starter theme"
 homepage = "https://github.com/edisonchee/hugo-theme-edison/"
 tags = ["blog"]
 features = ["blog"]
-min_version = "0.71"
+min_version = "0.74.1"
 
 [author]
   name = "Edison"
